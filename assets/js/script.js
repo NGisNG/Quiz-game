@@ -1,41 +1,41 @@
-const questions [
+const questions = [
     {
         question: "which is the largest animal in the world?",
         answers: [
-            { text:"shark", correct: false},
-            { text:"Blue whale", correct: true},
-            { text:"Elephant", correct: false},
-            { text:"Giraffe", correct: false},
+            { text: "shark", correct: false},
+            { text: "Blue whale", correct: true},
+            { text: "Elephant", correct: false},
+            { text: "Giraffe", correct: false},
         ]
     },
 
     {
         question: "which is the smallest country in the world?",
         answers: [
-            { text:"Vatican", correct: true},
-            { text:"Bhutan", correct: false},
-            { text:"Nepal", correct: false},
-            { text:"Shri Lanka", correct: false},
+            { text: "Vatican", correct: true},
+            { text: "Bhutan", correct: false},
+            { text: "Nepal", correct: false},
+            { text: "Shri Lanka", correct: false},
         ]
     },
 
     {
         question: "which is the largest desert in the world?",
         answers: [
-            { text:"Kalahari", correct: false},
-            { text:"Gobi", correct: false},
-            { text:"Sahara", correct: true},
-            { text:"Antartica", correct: false},
+            { text: "Kalahari", correct: false},
+            { text: "Gobi", correct: false},
+            { text: "Sahara", correct: true},
+            { text: "Antartica", correct: false},
         ]
     },
 
     {
         question: "which is the smallest continent in the world?",
         answers: [
-            { text:"Asia", correct: false},
-            { text:"Australia", correct: true},
-            { text:"Arktic", correct: false},
-            { text:"Africa", correct: false},
+            { text: "Asia", correct: false},
+            { text: "Australia", correct: true},
+            { text: "Arktic", correct: false},
+            { text: "Africa", correct: false},
         ]
     },
 ];
@@ -47,14 +47,14 @@ const nextButton = document.getElementById("next-btn");
 let currentQuestionIndex = 0;
 let score = 0;
 
-function startQuiz() {
+function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
     nextButton.innerHTML = "next";
     showQuestion();
 }
 
-function showQuestion() {
+function showQuestion(){
     resetState();
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
@@ -65,14 +65,28 @@ function showQuestion() {
         button.innerHTML = answer.text;
         button.classList.add("btn");
         answerButtons.appendChild(button);
+        if(answer.correct){
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener("click", selectAnswer);
     });
 }
 
 
 function resetState() {
     nextButton.style.display = "none";
-    while(answerButtons.firstChild) {
+    while(answerButtons.firstChild){
         answerButtons.removeChild(answerButtons.firstChild);
+    }
+}
+
+function startQuiz(){
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === "true";
+    if(isCorrect){
+        selectedBtn.classList.add("correct");
+    } else{
+        selectedBtn.classList.add("incorrect");
     }
 }
 
